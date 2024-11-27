@@ -23,9 +23,11 @@ export class BasePage {
   }
 
   async confirmAgePrompt(): Promise<void> {
-    const agePrompt = this.page.getByText("Yes, discover more");
-    if (await agePrompt.isVisible()) {
-      await agePrompt.click();
+    const confirmButton = this.page.locator(
+      '.ageconfirmation__confirmBtn [data-testid="customButton"]'
+    );
+    if (await confirmButton.isVisible()) {
+      await confirmButton.click();
     }
   }
 }
