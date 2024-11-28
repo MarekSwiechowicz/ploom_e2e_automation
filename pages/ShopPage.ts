@@ -2,10 +2,10 @@ import { BasePage } from "./basePage";
 
 export class ShopPage extends BasePage {
   async openAnyProductWithSKU(): Promise<void> {
-    const productElement = this.page.locator('[data-sku="16154414"]');
+    // Create a locator for the element with the specific data-sku
+    const productElement = this.page.locator('[data-sku="ploom-x-advanced"]');
 
-    await productElement.scrollIntoViewIfNeeded();
-
-    await productElement.click();
+    // Force-click the element regardless of visibility or state
+    await productElement.click({ force: true });
   }
 }

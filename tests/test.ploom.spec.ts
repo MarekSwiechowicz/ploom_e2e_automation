@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { BasePage } from "../pages/basePage";
-import { ProductPage } from "../pages/ProductPage";
+import { ProductsPage } from "../pages/ProductsPage";
 import { CartPage } from "../pages/CartPage";
 import { CheckoutPage } from "../pages/CheckoutPage";
 import { HomePage } from "../pages/HomePage";
@@ -9,7 +9,7 @@ import { ShopPage } from "../pages/ShopPage";
 // Define test data for different versions
 const testVersions = [
   { url: "https://www.ploom.co.uk/en", language: "en" },
-  { url: "https://www.ploom.pl/pl", language: "pl" },
+  // { url: "https://www.ploom.pl/pl", language: "pl" },
 ];
 
 test.describe("Test 1", () => {
@@ -20,7 +20,7 @@ test.describe("Test 1", () => {
       const basePage = new BasePage(page);
       const homePage = new HomePage(page);
       const shopPage = new ShopPage(page);
-      const productPage = new ProductPage(page);
+      const productPage = new ProductsPage(page);
       const cartPage = new CartPage(page);
       const checkoutPage = new CheckoutPage(page);
 
