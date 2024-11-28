@@ -1,4 +1,4 @@
-import { test } from "@playwright/test";
+import { expect, test } from "@playwright/test";
 import { BasePage } from "../pages/basePage";
 import { ProductPage } from "../pages/ProductPage";
 import { CartPage } from "../pages/CartPage";
@@ -15,6 +15,8 @@ const testVersions = [
 test.describe("Test 1", () => {
   for (const { url, language } of testVersions) {
     test(`Test site in ${language} version`, async ({ page }) => {
+      const viewportSize = page.viewportSize();
+      expect(viewportSize).toEqual({ width: 1440, height: 1098 });
       const basePage = new BasePage(page);
       const homePage = new HomePage(page);
       const shopPage = new ShopPage(page);
@@ -22,18 +24,12 @@ test.describe("Test 1", () => {
       const cartPage = new CartPage(page);
       const checkoutPage = new CheckoutPage(page);
 
-      // Navigate and handle cookies
       await basePage.navigateTo(url);
       await basePage.handleCookieBanner();
       await basePage.confirmAgePrompt();
 
-      // Select product and add to cart
       await homePage.navigateToShop();
-      await shopPage.openAnyProductWithSKU("ploom-x-advanced");
-
-      // // Proceed to checkout
-      // await cartPage.proceedToCheckout();
-      // await checkoutPage.loginAtCheckout();
+      await shopPage.openAnyProductWithSKU();
     });
   }
 });
