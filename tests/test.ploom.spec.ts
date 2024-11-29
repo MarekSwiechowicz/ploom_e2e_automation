@@ -1,10 +1,9 @@
 import { expect, test } from "@playwright/test";
 import { BasePage } from "../pages/basePage";
 import { ProductsPage } from "../pages/ProductsPage";
-import { CartPage } from "../pages/CartPage";
-import { CheckoutPage } from "../pages/CheckoutPage";
 import { HomePage } from "../pages/HomePage";
 import { ShopPage } from "../pages/ShopPage";
+import { CheckoutPage2 } from "../pages/CheckoutPage2";
 
 // Define test data for different versions
 const testVersions = [
@@ -20,9 +19,8 @@ test.describe("Test 1", () => {
       const basePage = new BasePage(page);
       const homePage = new HomePage(page);
       const shopPage = new ShopPage(page);
-      const productPage = new ProductsPage(page);
-      const cartPage = new CartPage(page);
-      const checkoutPage = new CheckoutPage(page);
+      const productsPage = new ProductsPage(page);
+      const checkoutPage2 = new CheckoutPage2(page);
 
       await basePage.navigateTo(url);
       await basePage.handleCookieBanner();
@@ -30,6 +28,10 @@ test.describe("Test 1", () => {
 
       await homePage.navigateToShop();
       await shopPage.openAnyProductWithSKU();
+      await productsPage.addToCart();
+      await basePage.checkBasket();
+      await productsPage.goToCheckout();
+      await checkoutPage2.isProductInCart("Ploom X Advanced Black");
     });
   }
 });
