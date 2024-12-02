@@ -1,6 +1,6 @@
 import { BasePage } from "./basePage";
 
-export class CheckoutPage2 extends BasePage {
+export class CheckoutPage extends BasePage {
   async isProductInCart(productName: string): Promise<boolean> {
     // Create a locator for the product name
     const productElement = this.page.locator(
@@ -10,10 +10,9 @@ export class CheckoutPage2 extends BasePage {
       }
     );
 
-    // Wait for the product element to be attached to the DOM
-    await productElement.waitFor({ state: "attached" });
-
     // Check if the product element is visible
     return await productElement.isVisible();
   }
+
+  async goToCheckout(): Promise<void> {}
 }
