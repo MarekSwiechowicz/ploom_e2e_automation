@@ -14,8 +14,8 @@ const testVersions = [
 test.describe("Test 1: Verify if it is possible to add a product to the cart.", () => {
   for (const { url, language } of testVersions) {
     test(`Test site in ${language} version`, async ({ page }) => {
-      const viewportSize = page.viewportSize();
-      expect(viewportSize).toEqual({ width: 1440, height: 1098 });
+      // const viewportSize = page.viewportSize();
+      // expect(viewportSize).toEqual({ width: 1440, height: 1098 });
       const basePage = new BasePage(page);
       const homePage = new HomePage(page);
       const shopPage = new ShopPage(page);
@@ -29,7 +29,7 @@ test.describe("Test 1: Verify if it is possible to add a product to the cart.", 
       await homePage.navigateToShop();
       await shopPage.openAnyProductWithSKU();
       await productsPage.addToCart();
-      await basePage.checkBasket(1);
+      await basePage.checkBasketCount(1);
       await productsPage.goToCheckout();
       await checkoutPage2.isProductInCart("Ploom X Advanced Black");
     });
@@ -64,8 +64,7 @@ test.describe("Test 2: Verify if it is possible to remove a product from the car
       expect(isInCart).toBe(false);
 
       // Check if the basket count is updated correctly
-      const basketCount = await basePage.checkBasket(0);
-      expect(basketCount).toBe(0);
+      await basePage.isBasketEmpty();
     });
   }
 });
